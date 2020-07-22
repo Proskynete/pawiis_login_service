@@ -4,14 +4,14 @@ const config = require('../config/config');
 
 const Schema = mongoose.Schema;
 
-const rolEnum = ['veterinarian', 'pet_owner'];
+const roleEnum = ['veterinarian', 'pet_owner'];
 
 const UserSchema = Schema(
 	{
 		email: { type: String, unique: true, lowercase: true, require: true },
 		password: { type: String, require: true },
 		name: { type: String },
-		rol: { type: String, enum: rolEnum, default: 'veterinarian' },
+		role: { type: String, enum: roleEnum, default: 'veterinarian' },
 		token: { type: String },
 		created_at: { type: Date },
 		updated_at: { type: Date },

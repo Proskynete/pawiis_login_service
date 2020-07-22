@@ -4,8 +4,8 @@ const serviceToken = require('../services/token.service');
 
 const signUp = (req, res) => {
 	const newUser = new User({
-		email: req.body.email,
-		password: req.body.password,
+		email: req.query.email,
+		password: req.query.password,
 		created_at: Date.now(),
 		updated_at: Date.now(),
 		last_login: Date.now(),
@@ -28,14 +28,13 @@ const signUp = (req, res) => {
 };
 
 const signIn = async (req, res) => {
+	const { email, password } = req.query;
+
 	try {
-		const { email, password } = req.body;
 		const user = await User.findOne({ email }).exec();
 
 		if (!user) {
-			return res
-				.status(404)
-				.json({ status: 404, logged_in: false, message: 'User not found' });
+			return res.status(404).json({ type: 'error', message: 'User not found' });
 		}
 
 		const passwordVerificated = await bcrypt.compare(password, user.password);
@@ -43,6 +42,7 @@ const signIn = async (req, res) => {
 		if (passwordVerificated) {
 			user.token = serviceToken.createToken(user);
 			user.last_login = Date.now();
+
 			const userUpdated = await user.save();
 
 			if (!userUpdated) {
