@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const User = require('../models/user.model');
+const User = require('../model/user.model');
 const serviceToken = require('../services/token.service');
 
 const signUp = (req, res) => {
