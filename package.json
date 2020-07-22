@@ -1,0 +1,15 @@
+{
+  "name": "pawiis_login_service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "author": {
+    "name": "Eduardo Alvarez",
+    "email": "eduardo.a1993@gmail.com"
+  },
+  "license": "MIT"
+}
